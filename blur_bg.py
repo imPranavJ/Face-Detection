@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 faceCasc = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 if (cap.isOpened() == False):
@@ -24,6 +24,7 @@ while(cap.isOpened()):
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred_img = blur_img(frame, factor=10)
+    b = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2RGB)
 
     faces = faceCasc.detectMultiScale(
         gray,
@@ -37,9 +38,10 @@ while(cap.isOpened()):
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), thickness=2)
 
         detected_face = frame[int(y):int(y+h), int(x):int(x+w)]
-        blurred_img[y:y+h, x:x+w] = detected_face
+        d = cv2.cvtColor(detected_face, cv2.COLOR_BGR2RGB)
+        b[y:y+h, x:x+w] = d
         
-        cv2.imshow('Face Detection', blurred_img[:,:,::-1])
+        cv2.imshow('Face Detection', b[:,:,::-1])
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
