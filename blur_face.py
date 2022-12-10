@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 faceCasc = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 if (cap.isOpened() == False):
@@ -25,7 +25,7 @@ while(cap.isOpened()):
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), thickness=2)
         
         roi = frame[y:y + h, x:x + w]
-        roi = cv2.GaussianBlur(roi, (23, 23), 0)
+        roi = cv2.GaussianBlur(roi, (49, 49), 0)
         frame[y:y + roi.shape[0], x:x + roi.shape[1]] = roi
         
         cv2.imshow('Face Detection', frame)
