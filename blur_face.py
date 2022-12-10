@@ -22,10 +22,13 @@ while(cap.isOpened()):
     )
 
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), thickness=2)
+        center_coordinates = x + w // 2, y + h // 2
+        radius = w // 2
+        cv2.circle(frame, center_coordinates, radius, (255, 255, 255), 2)
+        #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), thickness=2)
         
         roi = frame[y:y + h, x:x + w]
-        roi = cv2.GaussianBlur(roi, (49, 49), 0)
+        roi = cv2.GaussianBlur(roi, (79, 79), 0)
         frame[y:y + roi.shape[0], x:x + roi.shape[1]] = roi
         
         cv2.imshow('Face Detection', frame)
