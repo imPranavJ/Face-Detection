@@ -1,6 +1,6 @@
 import cv2
 
-imgPath = 'img4.jpg'
+imgPath = 'test.jpg'
 cascPath = 'Face_Recognition_mtcnn\face_recognition\haarcascade_frontalface_default.xml'
 faceCasc = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
